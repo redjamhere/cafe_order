@@ -29,11 +29,10 @@ class OrdersPage extends StatelessWidget {
                   ),
                 ),
               Loaded(:final orders) => ListView.separated(
-                  reverse: true,
                   itemCount: orders.length,
                   itemBuilder: (context, index) => ListTile(
                     title: Text(
-                      orders[index].table.name,
+                      orders.reversed.toList()[index].table.name,
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                     leading: Icon(
@@ -51,17 +50,21 @@ class OrdersPage extends StatelessWidget {
                                     .titleSmall!
                                     .copyWith(color: Colors.grey),
                                 children: [
-                              TextSpan(text: '№ ${orders[index].id}'),
+                              TextSpan(
+                                  text:
+                                      '№ ${orders.reversed.toList()[index].id}'),
                               WidgetSpan(
                                   child: SizedBox(
                                 width: 10,
                               )),
                               TextSpan(
-                                  text: DateFormat('hh:mm')
-                                      .format(orders[index].createdAt)),
+                                  text: DateFormat('hh:mm').format(orders
+                                      .reversed
+                                      .toList()[index]
+                                      .createdAt)),
                             ])),
                         Text(
-                          orders[index].totalPrice.toPrice(),
+                          orders.reversed.toList()[index].totalPrice.toPrice(),
                           style: Theme.of(context).textTheme.titleLarge,
                         )
                       ],
